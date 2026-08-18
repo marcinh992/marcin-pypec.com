@@ -1,7 +1,8 @@
 ---
-title: 'First post'
-description: 'Lorem ipsum dolor sit amet'
-pubDate: 'Jul 08 2022'
+title: 'The Art of Simplifying Systems'
+description: 'Techniques for removing complexity without removing value.'
+pubDate: 'Mar 18 2024'
+tags: ['Engineering', 'Clean Code']
 heroImage: '../../assets/blog-placeholder-3.jpg'
 ---
 

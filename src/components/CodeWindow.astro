@@ -1,0 +1,119 @@
+<aside class="code-window" aria-label="Decorative TypeScript code sample">
+	<div class="code-window__bar">
+		<span>design.ts</span>
+		<span>TypeScript</span>
+	</div>
+	<ol class="code-lines" aria-hidden="true">
+		<li><span class="code-line"><span class="kw">interface</span> <span class="type">System</span>&lt;<span class="type">TEvent</span>&gt; &#123;</span></li>
+		<li><span class="code-line">  handle(e): <span class="type">Promise</span>&lt;<span class="type">void</span>&gt;;</span></li>
+		<li><span class="code-line">&#125;</span></li>
+		<li><span class="code-line"></span></li>
+		<li><span class="code-line"><span class="kw">async function</span> <span class="fn">process</span>&lt;<span class="type">TEvent</span>&gt;(</span></li>
+		<li><span class="code-line">  system: <span class="type">System</span>&lt;<span class="type">TEvent</span>&gt;,</span></li>
+		<li><span class="code-line">  event: <span class="type">TEvent</span>,</span></li>
+		<li><span class="code-line">): <span class="type">Promise</span>&lt;<span class="type">void</span>&gt; &#123;</span></li>
+		<li><span class="code-line">  <span class="kw">await</span> system.handle(event);</span></li>
+		<li><span class="code-line">&#125;</span></li>
+	</ol>
+</aside>
+
+<style>
+	.code-window {
+		position: relative;
+		align-self: center;
+		width: min(100%, 488px);
+		margin-top: -18px;
+		border: 1px solid var(--color-border);
+		border-radius: 8px;
+		background:
+			linear-gradient(180deg, rgba(255, 255, 255, 0.052), transparent 34%),
+			rgba(20, 21, 23, 0.88);
+		box-shadow: 0 18px 58px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.042);
+		overflow: hidden;
+	}
+
+	.code-window::after {
+		position: absolute;
+		inset: 0;
+		background: radial-gradient(circle at 72% 10%, rgba(204, 125, 73, 0.1), transparent 28%);
+		content: '';
+		pointer-events: none;
+	}
+
+	.code-window__bar {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 19px 25px 13px;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.045);
+		color: var(--color-muted);
+		font-family: var(--font-mono);
+		font-size: 0.84rem;
+	}
+
+	.code-lines {
+		position: relative;
+		z-index: 1;
+		counter-reset: code-line;
+		margin: 0;
+		padding: 20px 29px 24px;
+		list-style: none;
+		color: #c9c1b7;
+		font-family: var(--font-mono);
+		font-size: clamp(0.78rem, 0.9vw, 0.85rem);
+		line-height: 1.68;
+		tab-size: 2;
+		white-space: pre;
+	}
+
+	.code-lines li {
+		display: grid;
+		grid-template-columns: 2ch minmax(0, 1fr);
+		gap: 2.2ch;
+		counter-increment: code-line;
+	}
+
+	.code-line {
+		min-width: 0;
+		color: #c9c1b7;
+		overflow: hidden;
+		text-overflow: clip;
+		white-space: pre;
+	}
+
+	.code-lines li::before {
+		color: rgba(170, 163, 154, 0.55);
+		content: counter(code-line);
+		text-align: right;
+		user-select: none;
+	}
+
+	.kw {
+		color: #cf8697;
+	}
+
+	.type {
+		color: #e2ad6a;
+	}
+
+	.fn {
+		color: #d9a45d;
+	}
+
+	@media (max-width: 900px) {
+		.code-window {
+			max-width: 620px;
+		}
+	}
+
+	@media (max-width: 520px) {
+		.code-lines {
+			padding: 20px 18px 24px;
+			font-size: 0.68rem;
+		}
+
+		.code-lines li {
+			gap: 1.6ch;
+		}
+	}
+</style>

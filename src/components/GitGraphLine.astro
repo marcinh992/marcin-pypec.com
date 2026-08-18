@@ -1,0 +1,57 @@
+<svg class="git-graph-line" viewBox="0 0 1200 840" preserveAspectRatio="none" aria-hidden="true">
+	<path
+		class="git-graph-line__path"
+		d="M-128 1 H630 C665 1 680 24 680 64 V112 C680 148 662 170 628 187 L586 208 C552 225 540 246 540 281 V314 C540 345 559 361 594 374 L641 391 C672 402 684 421 684 454 V510 C684 541 699 555 733 555 H809 M684 454 V574 C684 592 659 574 612 574 H34 C10 574 1 604 1 679 V790 C1 821 -17 836 -80 836"
+	/>
+	<path class="git-graph-line__path git-graph-line__branch" d="M680 112 H727" />
+	<path class="git-graph-line__path git-graph-line__branch" d="M733 555 H809" />
+	<circle class="git-graph-line__node" cx="680" cy="112" r="5" />
+	<circle class="git-graph-line__node" cx="540" cy="281" r="5" />
+	<circle class="git-graph-line__node" cx="733" cy="555" r="5" />
+	<circle class="git-graph-line__node" cx="1" cy="706" r="5" />
+	<circle class="git-graph-line__node" cx="-80" cy="836" r="5" />
+</svg>
+
+<style>
+	.git-graph-line {
+		position: absolute;
+		inset: 0;
+		z-index: 0;
+		width: 100%;
+		height: 100%;
+		overflow: visible;
+		pointer-events: none;
+	}
+
+	.git-graph-line__path {
+		fill: none;
+		stroke: var(--color-accent);
+		stroke-linecap: round;
+		stroke-width: 1.1;
+		opacity: 0.86;
+		vector-effect: non-scaling-stroke;
+	}
+
+	.git-graph-line__branch {
+		opacity: 0.48;
+	}
+
+	.git-graph-line__node {
+		fill: var(--color-bg);
+		stroke: var(--color-accent-strong);
+		stroke-width: 2;
+		vector-effect: non-scaling-stroke;
+	}
+
+	@media (max-width: 880px) {
+		.git-graph-line {
+			opacity: 0.32;
+		}
+	}
+
+	@media (max-width: 620px) {
+		.git-graph-line {
+			display: none;
+		}
+	}
+</style>

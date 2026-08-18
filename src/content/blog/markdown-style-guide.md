@@ -1,7 +1,8 @@
 ---
-title: 'Markdown Style Guide'
-description: 'Here is a sample of some basic Markdown syntax that can be used when writing Markdown content in Astro.'
-pubDate: 'Jun 19 2024'
+title: 'A Practical Approach to Modular Monoliths'
+description: 'How to keep a monolith healthy as it grows: boundaries, coupling, testing, and when to split.'
+pubDate: 'May 12 2024'
+tags: ['Architecture', 'Backend']
 heroImage: '../../assets/blog-placeholder-1.jpg'
 ---
 

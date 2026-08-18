@@ -1,0 +1,178 @@
+---
+import type { BlogPost } from '../lib/articles';
+import { getPrimaryTag, getReadingMinutes } from '../lib/articles';
+import FormattedDate from './FormattedDate.astro';
+
+interface Props {
+	post: BlogPost;
+}
+
+const { post } = Astro.props;
+const tag = getPrimaryTag(post);
+const minutes = getReadingMinutes(post);
+---
+
+<article class="featured-article">
+	<a href={`/blog/${post.id}/`} class="featured-article__link">
+		<div class="featured-article__glyph" aria-hidden="true">
+			<svg viewBox="0 0 96 96">
+				<path d="M29 30h14v14H29zM54 55h14v14H54zM36 44v13a8 8 0 0 0 8 8h10M43 37h9a8 8 0 0 1 8 8v10" />
+				<circle cx="36" cy="56" r="7" />
+				<circle cx="36" cy="73" r="4" />
+			</svg>
+		</div>
+
+		<div class="featured-article__body">
+			<p class="featured-article__eyebrow">Featured</p>
+			<h2>{post.data.title}</h2>
+			<p>{post.data.description}</p>
+			<div class="featured-article__meta">
+				<FormattedDate date={post.data.pubDate} />
+				<span aria-hidden="true">·</span>
+				<span>{minutes} min read</span>
+				<span aria-hidden="true">·</span>
+				<span class="featured-article__tag">{tag}</span>
+			</div>
+		</div>
+
+		<div class="featured-article__aside">
+			<p>Latest thinking on architecture and building for the long term.</p>
+			<span>Read article <span aria-hidden="true">-&gt;</span></span>
+		</div>
+	</a>
+</article>
+
+<style>
+	.featured-article {
+		position: relative;
+		border: 1px solid var(--color-border);
+		border-radius: 8px;
+		background:
+			linear-gradient(115deg, rgba(255, 255, 255, 0.033), transparent 43%),
+			rgba(12, 13, 14, 0.58);
+		box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.026);
+	}
+
+	.featured-article:hover {
+		border-color: var(--color-border-strong);
+	}
+
+	.featured-article__link {
+		display: grid;
+		grid-template-columns: 116px minmax(360px, 510px) minmax(300px, 1fr);
+		gap: 28px;
+		align-items: start;
+		min-height: 216px;
+		padding: 24px 28px 24px 26px;
+		text-decoration: none;
+	}
+
+	.featured-article__glyph {
+		display: grid;
+		place-items: center;
+		width: 104px;
+		aspect-ratio: 1;
+		border: 1px solid var(--color-border);
+		border-radius: 8px;
+		background:
+			linear-gradient(135deg, rgba(255, 255, 255, 0.04), transparent 56%),
+			rgba(255, 255, 255, 0.026);
+	}
+
+	.featured-article__glyph svg {
+		width: 70px;
+		height: 70px;
+		fill: none;
+		stroke: var(--color-accent);
+		stroke-linecap: round;
+		stroke-linejoin: round;
+		stroke-width: 2;
+	}
+
+	.featured-article__eyebrow {
+		margin-bottom: 8px;
+		color: var(--color-accent);
+		font-family: var(--font-mono);
+		font-size: 0.75rem;
+		letter-spacing: 0.02em;
+		text-transform: uppercase;
+	}
+
+	h2 {
+		max-width: 430px;
+		margin-bottom: 11px;
+		font-size: clamp(1.48rem, 1.7vw, 1.72rem);
+		line-height: 1.05;
+	}
+
+	.featured-article__body > p:not(.featured-article__eyebrow) {
+		max-width: 500px;
+		margin-bottom: 14px;
+		font-size: 0.9rem;
+		line-height: 1.45;
+	}
+
+	.featured-article__meta {
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 8px 10px;
+		color: var(--color-muted);
+		font-family: var(--font-mono);
+		font-size: 0.74rem;
+	}
+
+	.featured-article__tag {
+		padding: 2px 9px;
+		border: 1px solid rgba(204, 125, 73, 0.32);
+		border-radius: 5px;
+		color: var(--color-accent-strong);
+	}
+
+	.featured-article__aside {
+		display: flex;
+		min-height: 100%;
+		flex-direction: column;
+		justify-content: space-between;
+		gap: 42px;
+		padding: 14px 10px 12px 34px;
+	}
+
+	.featured-article__aside p {
+		max-width: 330px;
+		margin-top: 10px;
+		font-size: 0.98rem;
+		line-height: 1.55;
+	}
+
+	.featured-article__aside span {
+		align-self: flex-end;
+		color: var(--color-accent-strong);
+		font-size: 0.92rem;
+	}
+
+	@media (max-width: 900px) {
+		.featured-article__link {
+			grid-template-columns: 92px minmax(0, 1fr);
+		}
+
+		.featured-article__glyph {
+			width: 86px;
+		}
+
+		.featured-article__aside {
+			grid-column: 1 / -1;
+			min-height: auto;
+			padding: 20px 0 0;
+			border-top: 1px solid var(--color-border);
+			border-left: 0;
+		}
+	}
+
+	@media (max-width: 620px) {
+		.featured-article__link {
+			grid-template-columns: 1fr;
+			padding: 20px;
+		}
+	}
+</style>

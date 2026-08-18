@@ -1,7 +1,8 @@
 ---
-title: 'Second post'
-description: 'Lorem ipsum dolor sit amet'
-pubDate: 'Jul 15 2022'
+title: 'TypeScript for Better APIs'
+description: 'Leverage the type system to design clear, safe, and pleasant APIs.'
+pubDate: 'Apr 2 2024'
+tags: ['TypeScript', 'API Design']
 heroImage: '../../assets/blog-placeholder-4.jpg'
 ---
 

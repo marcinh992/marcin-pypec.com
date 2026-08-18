@@ -1,8 +1,19 @@
 ---
+import { getCollection } from 'astro:content';
+import ArticleCard from '../components/ArticleCard.astro';
 import BaseHead from '../components/BaseHead.astro';
+import CodeWindow from '../components/CodeWindow.astro';
+import FeaturedArticle from '../components/FeaturedArticle.astro';
 import Footer from '../components/Footer.astro';
+import GitGraphLine from '../components/GitGraphLine.astro';
 import Header from '../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import { AUTHOR_NAME, SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import { getUniqueTags, sortPostsByDate } from '../lib/articles';
+
+const posts = sortPostsByDate(await getCollection('blog'));
+const featuredPost = posts[0];
+const recentPosts = posts.slice(1, 5);
+const topics = getUniqueTags(posts);
 ---
 
 <!doctype html>
@@ -12,38 +23,285 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 	</head>
 	<body>
 		<Header />
-		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This template
-				serves as a lightweight, minimally-styled starting point for anyone looking to build a personal
-				website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to
-				<a href="https://docs.astro.build/">read the docs</a>
-				or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out
-				<a href="https://github.com/Charca/astro-blog-template">astro-blog-template</a>
-				by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
+		<main class="home-shell">
+			<GitGraphLine />
+
+			<section class="hero" aria-labelledby="hero-title">
+				<div class="hero__copy">
+					<h1 id="hero-title">{AUTHOR_NAME}</h1>
+					<p class="hero__dek">Software engineering, architecture, and practical lessons from building products.</p>
+					<p class="hero__body">
+						I write about designing systems, shipping reliable software, and the little lessons that
+						make a big difference over time. Clarity over cleverness. Ship, learn, repeat.
+					</p>
+					<div class="hero__actions" aria-label="Primary actions">
+						<a class="button button--primary" href="/blog">
+							<span>Browse Articles</span>
+							<span aria-hidden="true">-&gt;</span>
+						</a>
+						<a class="button button--ghost" href="/about">About Me</a>
+					</div>
+				</div>
+				<CodeWindow />
+			</section>
+
+			{
+				featuredPost && (
+					<section class="home-section" aria-labelledby="featured-title">
+						<h2 id="featured-title" class="sr-only">Featured Article</h2>
+						<FeaturedArticle post={featuredPost} />
+					</section>
+				)
+			}
+
+			<section class="home-section recent-section" aria-labelledby="recent-title">
+				<div class="section-heading">
+					<h2 id="recent-title">Recent articles</h2>
+					<a href="/blog">View all articles <span aria-hidden="true">-&gt;</span></a>
+				</div>
+				<div class="article-grid">
+					{recentPosts.map((post) => <ArticleCard post={post} />)}
+				</div>
+			</section>
+
+			{
+				topics.length > 0 && (
+					<section class="topics" aria-labelledby="topics-title">
+						<h2 id="topics-title">Topics</h2>
+						<ul>
+							{topics.map((topic) => (
+								<li>
+									<a href={`/blog?topic=${encodeURIComponent(topic)}`}>{topic}</a>
+								</li>
+							))}
+						</ul>
+					</section>
+				)
+			}
 		</main>
 		<Footer />
 	</body>
 </html>
+
+<style>
+	.home-shell {
+		position: relative;
+		padding-top: 54px;
+	}
+
+	.home-shell > :global(*:not(.git-graph-line)) {
+		position: relative;
+		z-index: 1;
+	}
+
+	.hero {
+		display: grid;
+		grid-template-columns: minmax(560px, 1fr) minmax(470px, 520px);
+		align-items: center;
+		gap: 68px;
+		min-height: 344px;
+		padding: 0 0 24px;
+	}
+
+	.hero__copy {
+		max-width: 650px;
+		padding-left: 0;
+	}
+
+	.hero h1 {
+		margin-bottom: 22px;
+		font-size: clamp(4.35rem, 5vw, 4.8rem);
+		white-space: nowrap;
+		text-shadow: 0 2px 16px rgba(255, 255, 255, 0.07);
+	}
+
+	.hero__dek {
+		max-width: 500px;
+		margin-bottom: 24px;
+		color: var(--color-accent);
+		font-size: clamp(1.32rem, 1.8vw, 1.48rem);
+		font-weight: 700;
+		line-height: 1.2;
+	}
+
+	.hero__body {
+		max-width: 540px;
+		margin-bottom: 28px;
+		font-size: 1.04rem;
+		line-height: 1.62;
+	}
+
+	.hero__actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 14px;
+	}
+
+	.button {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 45px;
+		padding: 0 21px;
+		border: 1px solid rgba(204, 125, 73, 0.64);
+		border-radius: 5px;
+		font-size: 0.96rem;
+		line-height: 1;
+		text-decoration: none;
+		transition:
+			border-color 180ms ease,
+			background 180ms ease,
+			color 180ms ease,
+			transform 180ms ease;
+	}
+
+	.button:hover {
+		transform: translateY(-1px);
+	}
+
+	.button--primary {
+		gap: 16px;
+		border-color: transparent;
+		background: linear-gradient(180deg, #eda46e, #c87946);
+		color: #120d09;
+		box-shadow: 0 12px 34px rgba(204, 125, 73, 0.18);
+	}
+
+	.button--primary:hover {
+		color: #120d09;
+	}
+
+	.button--ghost {
+		min-width: 142px;
+		color: var(--color-accent-strong);
+		background: rgba(7, 8, 9, 0.34);
+	}
+
+	.home-section {
+		margin-top: 0;
+	}
+
+	.recent-section {
+		margin-top: 0;
+		padding: 24px 8px 0;
+	}
+
+	.section-heading {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 24px;
+		margin-bottom: 10px;
+		padding: 0 16px;
+	}
+
+	.section-heading h2,
+	.topics h2 {
+		margin: 0;
+		font-size: clamp(1.45rem, 2vw, 1.65rem);
+	}
+
+	.section-heading a {
+		color: var(--color-accent-strong);
+		font-size: 0.92rem;
+		text-decoration: none;
+		white-space: nowrap;
+	}
+
+	.article-grid {
+		display: grid;
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		gap: 14px;
+	}
+
+	.topics {
+		display: flex;
+		align-items: center;
+		gap: 18px;
+		margin-top: 26px;
+		padding: 0 8px;
+	}
+
+	.topics h2 {
+		font-family: var(--font-sans);
+		font-size: 1rem;
+		font-weight: 400;
+		color: var(--color-muted);
+	}
+
+	.topics ul {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px 12px;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.topics a {
+		display: inline-flex;
+		align-items: center;
+		min-height: 28px;
+		padding: 0 12px;
+		border: 1px solid var(--color-border);
+		border-radius: 5px;
+		color: var(--color-muted);
+		font-size: 0.82rem;
+		text-decoration: none;
+	}
+
+	.topics a:hover {
+		border-color: var(--color-border-strong);
+		color: var(--color-accent-strong);
+	}
+
+	@media (max-width: 1080px) {
+		.hero {
+			grid-template-columns: 1fr;
+			min-height: auto;
+		}
+
+		.hero__copy {
+			padding-left: 0;
+		}
+
+		.article-grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+
+	@media (max-width: 700px) {
+		.home-shell {
+			padding-top: 42px;
+		}
+
+		.hero {
+			padding-bottom: 32px;
+		}
+
+		.hero__copy {
+			padding-left: 0;
+		}
+
+		.hero h1 {
+			font-size: clamp(3.7rem, 17vw, 4.6rem);
+			white-space: normal;
+		}
+
+		.section-heading {
+			align-items: flex-start;
+			flex-direction: column;
+			gap: 8px;
+		}
+
+		.article-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.topics {
+			align-items: flex-start;
+			flex-direction: column;
+			padding: 0;
+		}
+	}
+</style>

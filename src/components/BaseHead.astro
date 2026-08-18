@@ -34,6 +34,13 @@ const { title, description, image = FallbackImage } = Astro.props;
 
 <Font cssVariable="--font-atkinson" preload />
 
+<script is:inline>
+	try {
+		const theme = localStorage.getItem('theme');
+		if (theme) document.documentElement.dataset.theme = theme;
+	} catch {}
+</script>
+
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
 

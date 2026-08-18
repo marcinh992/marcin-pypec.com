@@ -1,7 +1,8 @@
 ---
-title: 'Third post'
-description: 'Lorem ipsum dolor sit amet'
-pubDate: 'Jul 22 2022'
+title: 'Observability That Pays Off'
+description: 'Focus on signals, not dashboards. Building observability into your system.'
+pubDate: 'Apr 14 2024'
+tags: ['DevOps', 'Architecture']
 heroImage: '../../assets/blog-placeholder-2.jpg'
 ---
 
