@@ -5,7 +5,6 @@ import BaseHead from '../components/BaseHead.astro';
 import CodeWindow from '../components/CodeWindow.astro';
 import FeaturedArticle from '../components/FeaturedArticle.astro';
 import Footer from '../components/Footer.astro';
-import GitGraphLine from '../components/GitGraphLine.astro';
 import Header from '../components/Header.astro';
 import { AUTHOR_NAME, SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 import { getUniqueTags, sortPostsByDate } from '../lib/articles';
@@ -24,8 +23,6 @@ const topics = getUniqueTags(posts);
 	<body>
 		<Header />
 		<main class="home-shell">
-			<GitGraphLine />
-
 			<section class="hero" aria-labelledby="hero-title">
 				<div class="hero__copy">
 					<h1 id="hero-title">{AUTHOR_NAME}</h1>
@@ -89,11 +86,6 @@ const topics = getUniqueTags(posts);
 		padding-top: 54px;
 	}
 
-	.home-shell > :global(*:not(.git-graph-line)) {
-		position: relative;
-		z-index: 1;
-	}
-
 	.hero {
 		display: grid;
 		grid-template-columns: minmax(560px, 1fr) minmax(470px, 520px);
@@ -141,11 +133,13 @@ const topics = getUniqueTags(posts);
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		min-height: 45px;
-		padding: 0 21px;
-		border: 1px solid rgba(204, 125, 73, 0.64);
+		min-width: 144px;
+		min-height: 43px;
+		padding: 0 17px;
+		border: 1px solid rgba(204, 125, 73, 0.68);
 		border-radius: 5px;
-		font-size: 0.96rem;
+		font-size: 0.9rem;
+		font-weight: 500;
 		line-height: 1;
 		text-decoration: none;
 		transition:
@@ -160,21 +154,24 @@ const topics = getUniqueTags(posts);
 	}
 
 	.button--primary {
-		gap: 16px;
+		gap: 15px;
 		border-color: transparent;
-		background: linear-gradient(180deg, #eda46e, #c87946);
-		color: #120d09;
-		box-shadow: 0 12px 34px rgba(204, 125, 73, 0.18);
+		background: linear-gradient(180deg, #e6a06d 0%, #d28a55 100%);
+		color: #17100b;
+		box-shadow:
+			inset 0 1px 0 rgba(255, 227, 198, 0.24),
+			0 12px 32px rgba(204, 125, 73, 0.16);
 	}
 
 	.button--primary:hover {
-		color: #120d09;
+		color: #17100b;
 	}
 
 	.button--ghost {
-		min-width: 142px;
+		min-width: 144px;
 		color: var(--color-accent-strong);
-		background: rgba(7, 8, 9, 0.34);
+		background: rgba(7, 8, 9, 0.42);
+		box-shadow: inset 0 1px 0 rgba(255, 214, 180, 0.03);
 	}
 
 	.home-section {
