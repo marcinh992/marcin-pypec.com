@@ -120,28 +120,35 @@ import HeaderLink from './HeaderLink.astro';
 
 	@media (max-width: 760px) {
 		.site-nav {
-			min-height: auto;
-			padding: 18px;
-			width: 100%;
-			align-items: flex-start;
+			align-items: stretch;
 			flex-direction: column;
-			gap: 14px;
+			min-height: auto;
+			width: 100%;
+			gap: 10px;
+			padding: 14px 18px 16px;
 		}
 
 		.site-nav__links {
+			display: grid;
+			grid-template-columns: repeat(4, minmax(0, 1fr)) minmax(48px, 0.72fr);
 			width: 100%;
-			gap: 18px;
-			justify-content: flex-start;
-			overflow-x: auto;
-			padding-bottom: 2px;
+			gap: 0;
+			font-size: clamp(0.92rem, 3.4vw, 1.05rem);
 		}
 
 		.site-nav__links a {
-			min-height: 36px;
+			justify-content: center;
+			min-width: 0;
+			min-height: 32px;
 		}
 
 		.github-link {
-			padding-left: 18px;
+			padding-left: 0;
+			border-left-color: rgba(226, 199, 172, 0.22);
+		}
+
+		.github-link span {
+			display: none;
 		}
 	}
 
@@ -154,8 +161,9 @@ import HeaderLink from './HeaderLink.astro';
 			font-size: 0.95rem;
 		}
 
-		.github-link span {
-			display: none;
+		.site-nav {
+			padding-right: 16px;
+			padding-left: 16px;
 		}
 	}
 </style>

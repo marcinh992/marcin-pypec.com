@@ -1,18 +1,25 @@
-<aside class="code-window" aria-label="Decorative TypeScript code sample">
+<aside class="code-window" aria-label="Decorative Java code sample">
 	<div class="code-window__bar">
-		<span>design.ts</span>
-		<span>TypeScript</span>
+		<span>LegacyFix.java</span>
+		<span>Java</span>
 	</div>
 	<ol class="code-lines" aria-hidden="true">
-		<li><span class="code-line"><span class="kw">interface</span> <span class="type">System</span>&lt;<span class="type">TEvent</span>&gt; &#123;</span></li>
-		<li><span class="code-line">  handle(e): <span class="type">Promise</span>&lt;<span class="type">void</span>&gt;;</span></li>
-		<li><span class="code-line">&#125;</span></li>
+		<li><span class="code-line"><span class="kw">final class</span> <span class="type">LegacyFix</span> &#123;</span></li>
 		<li><span class="code-line"></span></li>
-		<li><span class="code-line"><span class="kw">async function</span> <span class="fn">process</span>&lt;<span class="type">TEvent</span>&gt;(</span></li>
-		<li><span class="code-line">  system: <span class="type">System</span>&lt;<span class="type">TEvent</span>&gt;,</span></li>
-		<li><span class="code-line">  event: <span class="type">TEvent</span>,</span></li>
-		<li><span class="code-line">): <span class="type">Promise</span>&lt;<span class="type">void</span>&gt; &#123;</span></li>
-		<li><span class="code-line">  <span class="kw">await</span> system.handle(event);</span></li>
+		<li><span class="code-line">  <span class="kw">static boolean</span> done;</span></li>
+		<li><span class="code-line"></span></li>
+		<li><span class="code-line">  <span class="kw">static void</span> fix(<span class="type">Bug</span> bug) &#123;</span></li>
+		<li><span class="code-line">    <span class="type">Thread</span>.<span class="fn">startVirtualThread</span>(() -&gt; &#123;</span></li>
+		<li><span class="code-line">      bug.<span class="fn">fix</span>();</span></li>
+		<li><span class="code-line">      done = <span class="kw">true</span>;</span></li>
+		<li><span class="code-line">    &#125;);</span></li>
+		<li><span class="code-line"></span></li>
+		<li><span class="code-line">    <span class="kw">while</span> (!done) &#123;</span></li>
+		<li><span class="code-line">      <span class="type">Thread</span>.<span class="fn">onSpinWait</span>();</span></li>
+		<li><span class="code-line">    &#125;</span></li>
+		<li><span class="code-line"></span></li>
+		<li><span class="code-line">    <span class="type">Logger</span>.<span class="fn">debug</span>("fixed");</span></li>
+		<li><span class="code-line">  &#125;</span></li>
 		<li><span class="code-line">&#125;</span></li>
 	</ol>
 </aside>
