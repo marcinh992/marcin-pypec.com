@@ -16,41 +16,165 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 		<BaseHead title={title} description={description} />
 		<style>
 			main {
-				width: calc(100% - 2em);
+				width: 100%;
 				max-width: 100%;
 				margin: 0;
 			}
 			.hero-image {
-				width: 100%;
+				width: min(calc(100% - 64px), 1020px);
+				margin: 48px auto 0;
 			}
 			.hero-image img {
 				display: block;
 				margin: 0 auto;
-				border-radius: 12px;
+				border: 1px solid var(--color-border);
+				border-radius: 8px;
 				box-shadow: var(--box-shadow);
 			}
 			.prose {
-				width: 720px;
-				max-width: calc(100% - 2em);
-				margin: auto;
-				padding: 1em;
-				color: rgb(var(--gray-dark));
+				width: min(calc(100% - 48px), 68ch);
+				margin: 0 auto;
+				padding: 56px 0 72px;
+				color: var(--color-muted);
+				font-size: clamp(1.02rem, 0.95rem + 0.28vw, 1.16rem);
+				line-height: 1.72;
 			}
 			.title {
-				margin-bottom: 1em;
-				padding: 1em 0;
-				text-align: center;
-				line-height: 1;
+				margin-bottom: 48px;
+				padding: 0 0 34px;
+				border-bottom: 1px solid var(--color-border);
+				text-align: left;
 			}
 			.title h1 {
-				margin: 0 0 0.5em 0;
+				max-width: 11ch;
+				margin: 0;
+				font-size: clamp(3.15rem, 8vw, 5.55rem);
+				letter-spacing: 0;
+				line-height: 0.98;
 			}
 			.date {
-				margin-bottom: 0.5em;
-				color: rgb(var(--gray));
+				margin-bottom: 18px;
+				color: var(--color-accent-strong);
+				font-family: var(--font-mono);
+				font-size: 0.78rem;
+				letter-spacing: 0;
 			}
 			.last-updated-on {
+				margin-top: 4px;
+				color: var(--color-subtle);
 				font-style: italic;
+			}
+
+			.prose :global(p) {
+				margin: 0 0 1.35em;
+			}
+
+			.prose :global(h2),
+			.prose :global(h3) {
+				scroll-margin-top: 110px;
+			}
+
+			.prose :global(h2) {
+				margin: 2.6em 0 0.72em;
+				font-size: clamp(1.75rem, 1.35rem + 1.4vw, 2.45rem);
+				line-height: 1.12;
+			}
+
+			.prose :global(h2:first-child) {
+				margin-top: 0;
+			}
+
+			.prose :global(h3) {
+				margin: 2.05em 0 0.68em;
+				color: var(--color-accent-strong);
+				font-family: var(--font-sans);
+				font-size: 1.05rem;
+				font-weight: 700;
+				line-height: 1.32;
+			}
+
+			.prose :global(ul),
+			.prose :global(ol) {
+				margin: 0 0 1.65em;
+				padding-left: 1.35em;
+			}
+
+			.prose :global(li) {
+				margin-bottom: 0.56em;
+				padding-left: 0.18em;
+			}
+
+			.prose :global(li::marker) {
+				color: var(--color-accent-strong);
+				font-weight: 700;
+			}
+
+			.prose :global(blockquote) {
+				margin: 2.1em 0;
+				padding: 1.05em 1.2em 1.05em 1.35em;
+				border: 1px solid var(--color-border);
+				border-left: 3px solid var(--color-accent);
+				border-radius: 8px;
+				background:
+					linear-gradient(135deg, rgba(255, 255, 255, 0.035), transparent 52%),
+					rgba(255, 255, 255, 0.025);
+				color: var(--color-text);
+				font-family: var(--font-serif);
+				font-size: 1.13em;
+				line-height: 1.55;
+			}
+
+			.prose :global(blockquote p:last-child) {
+				margin-bottom: 0;
+			}
+
+			.prose :global(pre) {
+				margin: 2em 0;
+				padding: 1.15em 1.25em;
+				border-color: rgba(226, 199, 172, 0.2);
+				border-radius: 8px;
+				background:
+					linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 38%),
+					rgba(14, 15, 17, 0.92);
+				font-size: 0.9em;
+				line-height: 1.62;
+			}
+
+			.prose :global(:not(pre) > code) {
+				border-color: rgba(204, 125, 73, 0.26);
+				background: rgba(204, 125, 73, 0.1);
+				color: var(--color-accent-strong);
+				font-size: 0.85em;
+			}
+
+			.prose :global(hr) {
+				margin: 2.4em 0;
+				border-top-color: var(--color-border);
+			}
+
+			@media (max-width: 760px) {
+				.hero-image {
+					width: min(calc(100% - 36px), 1020px);
+					margin-top: 34px;
+				}
+
+				.prose {
+					width: min(calc(100% - 36px), 68ch);
+					padding: 42px 0 60px;
+				}
+
+				.title {
+					margin-bottom: 38px;
+					padding-bottom: 28px;
+				}
+
+				.title h1 {
+					max-width: 100%;
+				}
+
+				.prose :global(blockquote) {
+					padding: 0.95em 1em;
+				}
 			}
 		</style>
 	</head>

@@ -1,0 +1,69 @@
+<svg class="decorative-path" viewBox="0 0 1200 930" preserveAspectRatio="none" aria-hidden="true">
+	<path
+		class="decorative-path__stroke"
+		d="M72 0 H603
+			C639 0 655 18 655 54
+			V104
+			C655 137 637 156 606 173
+			L590 181
+			C568 193 560 218 560 260
+			V288
+			C560 320 538 340 505 354
+			C463 374 462 414 506 430
+			C538 442 579 442 608 442
+			C662 442 685 452 685 482
+			V545
+			C685 589 657 612 598 612
+			H37
+			C15 612 3 633 3 674
+			V821
+			C3 892 -23 925 -69 930
+			H-128"
+	/>
+	<path class="decorative-path__stroke decorative-path__branch" d="M655 104 H693" />
+	<path class="decorative-path__stroke decorative-path__branch" d="M685 482 H715" />
+
+	<circle class="decorative-path__node" cx="655" cy="104" r="5" />
+	<circle class="decorative-path__node" cx="560" cy="288" r="5" />
+	<circle class="decorative-path__node" cx="685" cy="482" r="5" />
+	<circle class="decorative-path__node" cx="3" cy="719" r="5" />
+	<circle class="decorative-path__node" cx="-69" cy="930" r="5" />
+</svg>
+
+<style>
+	.decorative-path {
+		display: block;
+		width: 100%;
+		height: 100%;
+		overflow: visible;
+		pointer-events: none;
+	}
+
+	.decorative-path__stroke {
+		fill: none;
+		stroke: var(--color-accent);
+		stroke-linecap: round;
+		stroke-linejoin: round;
+		stroke-width: 1.35;
+		opacity: 0.78;
+		shape-rendering: geometricPrecision;
+		vector-effect: non-scaling-stroke;
+	}
+
+	.decorative-path__branch {
+		opacity: 0.52;
+	}
+
+	.decorative-path__node {
+		fill: var(--color-bg);
+		stroke: var(--color-accent-strong);
+		stroke-width: 2;
+		vector-effect: non-scaling-stroke;
+	}
+
+	@media (max-width: 980px) {
+		.decorative-path {
+			display: none;
+		}
+	}
+</style>
