@@ -3,7 +3,6 @@ title: 'On the Other Side of the Pull Request'
 description: 'A practical checklist for reviewing pull requests with clarity, judgment, and long-term ownership.'
 pubDate: 'Aug 28 2026'
 tags: ['Code Review', 'Pull Requests', 'Engineering']
-heroImage: '../../assets/blog-placeholder-1.jpg'
 ---
 
 Hey,
