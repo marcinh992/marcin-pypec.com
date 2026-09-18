@@ -7,4 +7,4 @@ export const SITE_DESCRIPTION =
 
 export const AUTHOR_NAME = 'Marcin Pypec';
 export const GITHUB_URL = 'https://github.com/marcinh992';
-export const CONTACT_EMAIL = 'mpypec09@gmail.com';
+export const CONTACT_EMAIL = 'my-own-blog-before-gta6';
