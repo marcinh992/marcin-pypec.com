@@ -1,63 +1,271 @@
 ---
-import AboutHeroImage from '../assets/blog-placeholder-about.jpg';
-import Layout from '../layouts/BlogPost.astro';
+import { Image } from 'astro:assets';
+import Portrait from '../assets/marcin-pypec-portrait.jpeg';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+
+const title = 'About | Marcin Pypec';
+const description =
+	'About Marcin Pypec and the ideas behind a software engineering blog focused on real-world development, lessons, mistakes, and practical engineering.';
 ---
 
-<Layout
-	title="About Me"
-	description="Lorem ipsum dolor sit amet"
-	pubDate={new Date('August 08 2021')}
-	heroImage={AboutHeroImage}
->
-	<p>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-		labore et dolore magna aliqua. Vitae ultricies leo integer malesuada nunc vel risus commodo
-		viverra. Adipiscing enim eu turpis egestas pretium. Euismod elementum nisi quis eleifend quam
-		adipiscing. In hac habitasse platea dictumst vestibulum. Sagittis purus sit amet volutpat. Netus
-		et malesuada fames ac turpis egestas. Eget magna fermentum iaculis eu non diam phasellus
-		vestibulum lorem. Varius sit amet mattis vulputate enim. Habitasse platea dictumst quisque
-		sagittis. Integer quis auctor elit sed vulputate mi. Dictumst quisque sagittis purus sit amet.
-	</p>
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={title} description={description} image={Portrait} />
+	</head>
+	<body>
+		<Header />
+		<main class="about-page">
+			<article>
+				<section class="about-introduction" aria-labelledby="about-title">
+					<div class="about-introduction__copy">
+						<h1 id="about-title">About me</h1>
+						<p class="about-lead">
+							<strong>
+								I'm Marcin, a software engineer writing about the parts of software development that
+								don't usually make it into tutorials.
+							</strong>
+						</p>
+						<p>
+							I've worked on everything from greenfield products to large legacy monoliths. Along the
+							way, I learned that knowing how to write code is only one part of the job - and often not
+							even the most difficult one.
+						</p>
+						<p>
+							You can understand Java, Spring, databases, testing, architecture, and all the usual
+							technical concepts, and still open a vaguely described task on Monday morning and think:
+						</p>
+						<p class="about-question"><em>Okay... where do I even start?</em></p>
+					</div>
 
-	<p>
-		Morbi tristique senectus et netus. Id semper risus in hendrerit gravida rutrum quisque non
-		tellus. Habitasse platea dictumst quisque sagittis purus sit amet. Tellus molestie nunc non
-		blandit massa. Cursus vitae congue mauris rhoncus. Accumsan tortor posuere ac ut. Fringilla urna
-		porttitor rhoncus dolor. Elit ullamcorper dignissim cras tincidunt lobortis. In cursus turpis
-		massa tincidunt dui ut ornare lectus. Integer feugiat scelerisque varius morbi enim nunc.
-		Bibendum neque egestas congue quisque egestas diam. Cras ornare arcu dui vivamus arcu felis
-		bibendum. Dignissim suspendisse in est ante in nibh mauris. Sed tempus urna et pharetra pharetra
-		massa massa ultricies mi.
-	</p>
+					<figure class="about-portrait">
+						<Image
+							src={Portrait}
+							alt="Portrait of Marcin Pypec"
+							width={420}
+							widths={[360, 540, 720, 886]}
+							sizes="(max-width: 416px) calc(100vw - 36px), (max-width: 960px) 380px, 320px"
+							format="webp"
+							quality={90}
+							loading="eager"
+							fetchpriority="high"
+						/>
+					</figure>
+				</section>
 
-	<p>
-		Mollis nunc sed id semper risus in. Convallis a cras semper auctor neque. Diam sit amet nisl
-		suscipit. Lacus viverra vitae congue eu consequat ac felis donec. Egestas integer eget aliquet
-		nibh praesent tristique magna sit amet. Eget magna fermentum iaculis eu non diam. In vitae
-		turpis massa sed elementum. Tristique et egestas quis ipsum suspendisse ultrices. Eget lorem
-		dolor sed viverra ipsum. Vel turpis nunc eget lorem dolor sed viverra. Posuere ac ut consequat
-		semper viverra nam. Laoreet suspendisse interdum consectetur libero id faucibus. Diam phasellus
-		vestibulum lorem sed risus ultricies tristique. Rhoncus dolor purus non enim praesent elementum
-		facilisis. Ultrices tincidunt arcu non sodales neque. Tempus egestas sed sed risus pretium quam
-		vulputate. Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. Fringilla
-		urna porttitor rhoncus dolor purus non. Amet dictum sit amet justo donec enim.
-	</p>
+				<div class="about-body">
+					<p>
+						Large features get messy. Requirements are incomplete. Existing code doesn't behave the
+						way you expected. The technically perfect solution doesn't always make sense for the
+						project. You make assumptions, change your mind, discover something three layers deeper
+						than you wanted to, and occasionally realize that the decision you were completely
+						confident about two days ago wasn't that great after all.
+					</p>
+					<p>That's the side of software engineering I want to write about.</p>
+					<p>
+						There's already enough content called <em>“10 things every senior developer should know”</em>
+						{' '}or <em>“5 Spring Boot tricks that will 10x your application performance.”</em> Some of it is
+						useful, but it rarely resembles what an ordinary day working on a real product looks like.
+					</p>
+					<p>
+						Software development gets romanticized sometimes. I think it's closer to being a car
+						mechanic than people like to admit.
+					</p>
+					<p>
+						The mechanic comes home with oil on his hands and dirty clothes. Our mess just isn't
+						physical. It's hidden in half-understood requirements, old code, awkward integrations,
+						production bugs, questionable decisions, unfinished migrations, and that one feature
+						everyone is afraid to touch.
+					</p>
+					<p>And that's fine. That's the job.</p>
 
-	<p>
-		Mattis ullamcorper velit sed ullamcorper morbi tincidunt. Tortor posuere ac ut consequat semper
-		viverra. Tellus mauris a diam maecenas sed enim ut sem viverra. Venenatis urna cursus eget nunc
-		scelerisque viverra mauris in. Arcu ac tortor dignissim convallis aenean et tortor at. Curabitur
-		gravida arcu ac tortor dignissim convallis aenean et tortor. Egestas tellus rutrum tellus
-		pellentesque eu. Fusce ut placerat orci nulla pellentesque dignissim enim sit amet. Ut enim
-		blandit volutpat maecenas volutpat blandit aliquam etiam. Id donec ultrices tincidunt arcu. Id
-		cursus metus aliquam eleifend mi.
-	</p>
+					<section aria-labelledby="why-i-write">
+						<h2 id="why-i-write">Why I write</h2>
+						<p>
+							I try to write the way I would have wanted someone to write to me when I was starting out.
+						</p>
+						<p>
+							Not to sound clever. Not to impress other developers with terminology. And definitely not
+							to turn a simple idea into an architecture lecture just because I can.
+						</p>
+						<p>If something can be explained simply, I want to explain it simply.</p>
+						<p><strong>KISS applies to writing too.</strong></p>
+						<p>
+							My goal is for a post to leave you with something you can actually take back to a project:
+							a different way to approach a task, a mistake you can avoid, a question worth asking before
+							you start coding, or sometimes just an idea that might save you from learning something
+							the painful way.
+						</p>
+						<p>
+							I'm particularly interested in everything that happens <strong>around the code</strong>:
+							understanding tasks, breaking down larger features, making technical decisions, working
+							with existing systems, reviewing code, dealing with uncertainty, keeping context, and
+							figuring out what the actual problem is before reaching for an implementation.
+						</p>
+						<p>
+							That part matters even more now that AI can produce increasingly large amounts of code for
+							us. Writing syntax is getting cheaper. Knowing{' '}
+							<strong>
+								what should be built, why, where it belongs, what can go wrong, and whether the result
+								actually makes sense
+							</strong>
+							{' '}isn't.
+						</p>
+					</section>
 
-	<p>
-		Tempus quam pellentesque nec nam aliquam sem. Risus at ultrices mi tempus imperdiet. Id porta
-		nibh venenatis cras sed felis eget velit. Ipsum a arcu cursus vitae. Facilisis magna etiam
-		tempor orci eu lobortis elementum. Tincidunt dui ut ornare lectus sit. Quisque non tellus orci
-		ac. Blandit libero volutpat sed cras. Nec tincidunt praesent semper feugiat nibh sed pulvinar
-		proin gravida. Egestas integer eget aliquet nibh praesent tristique magna.
-	</p>
-</Layout>
+					<section aria-labelledby="there-will-still-be-code">
+						<h2 id="there-will-still-be-code">There will still be code</h2>
+						<p>This isn't going to be a blog about software engineering without any software.</p>
+						<p>
+							I'll also write about technical experiments, small proof-of-concepts, architecture ideas,
+							things I've recently explored, and projects worth documenting. Some of them will come with
+							code and GitHub repositories.
+						</p>
+						<p>
+							Sometimes a post might simply exist because I spent a weekend investigating something
+							interesting and wanted to document what I learned - even if I'm the only person who ever
+							comes back to read it.
+						</p>
+						<p>That's probably the simplest description of this blog:</p>
+						<p class="about-closing">
+							<strong>notes, mistakes, experiments, and lessons from building software in the real world.</strong>
+						</p>
+					</section>
+				</div>
+			</article>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	.about-page {
+		padding: clamp(54px, 6vw, 78px) 0 88px;
+	}
+
+	.about-introduction {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(280px, 320px);
+		align-items: start;
+		gap: clamp(48px, 5vw, 64px);
+	}
+
+	.about-introduction__copy {
+		max-width: 68ch;
+	}
+
+	h1 {
+		margin-bottom: 30px;
+		font-size: clamp(3.8rem, 6vw, 5.5rem);
+		line-height: 0.98;
+	}
+
+	.about-introduction p,
+	.about-body {
+		font-size: clamp(1.02rem, 0.96rem + 0.2vw, 1.12rem);
+		line-height: 1.72;
+	}
+
+	.about-introduction p {
+		margin: 0 0 1.3em;
+	}
+
+	.about-lead {
+		max-width: 58ch;
+		color: var(--color-text);
+		font-size: clamp(1.15rem, 1.04rem + 0.35vw, 1.32rem) !important;
+		line-height: 1.52 !important;
+	}
+
+	.about-lead strong {
+		font-weight: 700;
+	}
+
+	.about-question {
+		margin-bottom: 0 !important;
+		color: var(--color-text);
+		font-family: var(--font-serif);
+		font-size: 1.13em !important;
+	}
+
+	.about-portrait {
+		width: min(100%, 320px);
+		margin: 8px 0 0;
+		justify-self: end;
+	}
+
+	.about-portrait :global(img) {
+		display: block;
+		width: 100%;
+		height: auto;
+		border: 1px solid var(--color-border);
+		border-radius: 8px;
+	}
+
+	.about-body {
+		width: min(100%, 800px);
+		margin: 32px 0 0;
+		color: var(--color-muted);
+	}
+
+	.about-body p {
+		margin: 0 0 1.22em;
+	}
+
+	.about-body h2 {
+		margin: 64px 0 18px;
+		font-size: clamp(1.8rem, 1.5rem + 1vw, 2.35rem);
+		line-height: 1.12;
+		scroll-margin-top: 110px;
+	}
+
+	.about-body strong,
+	.about-body em {
+		color: var(--color-text);
+	}
+
+	.about-closing {
+		margin-top: 2.2em !important;
+		padding-top: 1.3em;
+		border-top: 1px solid var(--color-border);
+		color: var(--color-text);
+		font-family: var(--font-serif);
+		font-size: 1.2em;
+		line-height: 1.5;
+	}
+
+	@media (max-width: 960px) {
+		.about-introduction {
+			grid-template-columns: 1fr;
+			gap: 42px;
+		}
+
+		.about-portrait {
+			width: min(100%, 380px);
+			margin-top: 0;
+			justify-self: start;
+		}
+	}
+
+	@media (max-width: 760px) {
+		.about-page {
+			padding-top: 42px;
+			padding-bottom: 64px;
+		}
+
+		h1 {
+			margin-bottom: 26px;
+			font-size: clamp(3.45rem, 17vw, 4.5rem);
+		}
+
+		.about-introduction {
+			gap: 34px;
+		}
+
+		.about-body h2 {
+			margin-top: 52px;
+		}
+	}
+</style>
