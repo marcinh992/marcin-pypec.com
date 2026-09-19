@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import ArticleCard from '../components/ArticleCard.astro';
 import BaseHead from '../components/BaseHead.astro';
 import CodeWindow from '../components/CodeWindow.astro';
+import DecorativePath from '../components/DecorativePath.astro';
 import FeaturedArticle from '../components/FeaturedArticle.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
@@ -38,6 +39,7 @@ const topics = Array.from(
 		<Header />
 		<main class="home-shell">
 			<section class="hero" aria-labelledby="hero-title">
+				<DecorativePath segment="hero" />
 				<div class="hero__copy">
 					<h1 id="hero-title">{AUTHOR_NAME}</h1>
 					<p class="hero__dek">Software engineering, architecture, and practical lessons from building products.</p>
@@ -59,57 +61,61 @@ const topics = Array.from(
 			{
 				featuredPost && (
 					<section class="home-section" aria-labelledby="featured-title">
+						<DecorativePath segment="featured" />
 						<h2 id="featured-title" class="sr-only">Featured Article</h2>
 						<FeaturedArticle post={featuredPost} />
 					</section>
 				)
 			}
 
-			<section class="home-section recent-section" aria-labelledby="recent-title">
-				<div class="section-heading">
-					<h2 id="recent-title">Recent articles</h2>
-					<a href="/blog">View all articles <span aria-hidden="true">-&gt;</span></a>
-				</div>
-				<div class="article-grid">
-					{recentPosts.map((post) => <ArticleCard post={post} />)}
-					{
-						plannedPosts.map((post) => (
-							<article
-								class="upcoming-card"
-								tabindex="0"
-								aria-label={`${post.title} is in progress`}
-								title={`${post.title} - in progress`}
-							>
-								<div class="upcoming-card__inner">
-									<div>
-										<h3>{post.title}</h3>
-										<p>{post.description}</p>
+			<div class="home-feed">
+				<DecorativePath segment="feed" />
+				<section class="home-section recent-section" aria-labelledby="recent-title">
+					<div class="section-heading">
+						<h2 id="recent-title">Recent articles</h2>
+						<a href="/blog">View all articles <span aria-hidden="true">-&gt;</span></a>
+					</div>
+					<div class="article-grid">
+						{recentPosts.map((post) => <ArticleCard post={post} />)}
+						{
+							plannedPosts.map((post) => (
+								<article
+									class="upcoming-card"
+									tabindex="0"
+									aria-label={`${post.title} is in progress`}
+									title={`${post.title} - in progress`}
+								>
+									<div class="upcoming-card__inner">
+										<div>
+											<h3>{post.title}</h3>
+											<p>{post.description}</p>
+										</div>
+										<div class="upcoming-card__meta">
+											<span>In progress</span>
+											<span class="upcoming-card__tag">{post.tag}</span>
+										</div>
 									</div>
-									<div class="upcoming-card__meta">
-										<span>In progress</span>
-										<span class="upcoming-card__tag">{post.tag}</span>
-									</div>
-								</div>
-							</article>
-						))
-					}
-				</div>
-			</section>
+								</article>
+							))
+						}
+					</div>
+				</section>
 
-			{
-				topics.length > 0 && (
-					<section class="topics" aria-labelledby="topics-title">
-						<h2 id="topics-title">Topics</h2>
-						<ul>
-							{topics.map((topic) => (
-								<li>
-									<a href={`/blog?topic=${encodeURIComponent(topic)}`}>{topic}</a>
-								</li>
-							))}
-						</ul>
-					</section>
-				)
-			}
+				{
+					topics.length > 0 && (
+						<section class="topics" aria-labelledby="topics-title">
+							<h2 id="topics-title">Topics</h2>
+							<ul>
+								{topics.map((topic) => (
+									<li>
+										<a href={`/blog?topic=${encodeURIComponent(topic)}`}>{topic}</a>
+									</li>
+								))}
+							</ul>
+						</section>
+					)
+				}
+			</div>
 		</main>
 		<Footer />
 	</body>
@@ -118,7 +124,14 @@ const topics = Array.from(
 <style>
 	.home-shell {
 		position: relative;
+		isolation: isolate;
 		padding-top: 54px;
+	}
+
+	.hero,
+	.home-section,
+	.home-feed {
+		position: relative;
 	}
 
 	.hero {
