@@ -13,8 +13,14 @@ import HeaderLink from './HeaderLink.astro';
 		<div class="site-nav__links">
 			<HeaderLink href="/blog">Articles</HeaderLink>
 			<HeaderLink href="/about">About</HeaderLink>
-			<a href="/notes">Notes</a>
-			<a href="/uses">Uses</a>
+			<span class="nav-pending" tabindex="0" aria-disabled="true" aria-describedby="notes-status">
+				<span>Notes</span>
+				<span class="nav-pending__tooltip" id="notes-status" role="tooltip">In progress</span>
+			</span>
+			<span class="nav-pending" tabindex="0" aria-disabled="true" aria-describedby="uses-status">
+				<span>Uses</span>
+				<span class="nav-pending__tooltip" id="uses-status" role="tooltip">In progress</span>
+			</span>
 			<a
 				href={LINKEDIN_URL}
 				target="_blank"
@@ -89,11 +95,15 @@ import HeaderLink from './HeaderLink.astro';
 		font-size: 0.95rem;
 	}
 
-	.site-nav__links a {
+	.site-nav__links a,
+	.nav-pending {
 		position: relative;
 		display: inline-flex;
 		align-items: center;
 		min-height: 70px;
+	}
+
+	.site-nav__links a {
 		color: var(--color-text);
 		text-decoration: none;
 	}
@@ -111,6 +121,43 @@ import HeaderLink from './HeaderLink.astro';
 		background: var(--color-accent);
 		box-shadow: 0 0 0 4px var(--color-bg), 0 0 0 5px var(--color-accent);
 		content: '';
+	}
+
+	.nav-pending {
+		color: var(--color-muted);
+		cursor: not-allowed;
+	}
+
+	.nav-pending__tooltip {
+		position: absolute;
+		top: calc(100% - 5px);
+		left: 50%;
+		z-index: 2;
+		padding: 3px 7px;
+		transform: translate(-50%, -3px);
+		border: 1px solid var(--color-border-strong);
+		border-radius: 4px;
+		background: var(--color-bg-soft);
+		box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+		color: var(--color-accent-strong);
+		font-family: var(--font-mono);
+		font-size: 0.68rem;
+		line-height: 1.4;
+		opacity: 0;
+		pointer-events: none;
+		transition:
+			opacity 140ms ease,
+			transform 140ms ease,
+			visibility 140ms ease;
+		visibility: hidden;
+		white-space: nowrap;
+	}
+
+	.nav-pending:hover .nav-pending__tooltip,
+	.nav-pending:focus-visible .nav-pending__tooltip {
+		transform: translate(-50%, 0);
+		opacity: 1;
+		visibility: visible;
 	}
 
 	.social-link {
@@ -142,7 +189,8 @@ import HeaderLink from './HeaderLink.astro';
 			font-size: clamp(0.92rem, 3.4vw, 1.05rem);
 		}
 
-		.site-nav__links a {
+		.site-nav__links a,
+		.nav-pending {
 			justify-content: center;
 			min-width: 0;
 			min-height: 32px;
