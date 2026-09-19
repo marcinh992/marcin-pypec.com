@@ -6,6 +6,5 @@ export const SITE_DESCRIPTION =
 	'Software engineering, architecture, and practical lessons from building products.';
 
 export const AUTHOR_NAME = 'Marcin Pypec';
-export const GITHUB_URL = 'https://github.com/marcinh992';
 export const LINKEDIN_URL = 'https://www.linkedin.com/in/marcin-pypeć-997706432';
 export const CONTACT_EMAIL = 'mpypec09@gmail.com';
